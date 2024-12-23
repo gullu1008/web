@@ -27,6 +27,7 @@ if ($islem == "ekle") {
         $sorgu = $baglan->query("INSERT INTO portfolyo (baslik, resim) VALUES ('$baslik', '../$resim')");
         echo "<script> window.location.href='portfolyo.php'; </script>";
         exit(); 
+        
     }
 }
 

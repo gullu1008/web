@@ -140,9 +140,9 @@ ALTER TABLE `portfolyo`
 ALTER TABLE `kullanici`
   MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- Tablo için AUTO_INCREMENT değeri `portfolyo`
---
+
+
+
 ALTER TABLE `portfolyo`
   MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
