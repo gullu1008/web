@@ -1,8 +1,8 @@
 <?php
 include 'yonetim/ayar.php';
 
-$kullanici = "yonetici";
-$sifre = password_hash("123", PASSWORD_DEFAULT);
+$kullanici = "admin";
+$sifre = password_hash("Cf4284!.", PASSWORD_DEFAULT);
 
 // Veritabanına kullanıcıyı ekle
 $sql = $baglan->prepare("INSERT INTO kullanici (kullanici, sifre) VALUES (?, ?)");

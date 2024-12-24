@@ -21,6 +21,7 @@ if ($islem == "sil") {
 
 if ($islem == "ekle") {
     if ($_POST) {
+        #Resim resource değişikliği yapıldı.
         $baslik = $baglan->real_escape_string($_POST["baslik"]); 
         $resim = "img/".$_FILES["resim"]["name"];
         move_uploaded_file($_FILES["resim"]["tmp_name"], $resim);

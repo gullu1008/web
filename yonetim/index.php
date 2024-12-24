@@ -5,7 +5,6 @@ include("ayar.php");
 if ($_POST) {
     $kullanici = $_POST["kullanici"];
     $sifre = $_POST["sifre"];
-
     
     $sorgu = $baglan->prepare("SELECT * FROM kullanici WHERE kullanici = ?");
     $sorgu->bind_param("s", $kullanici);
@@ -14,10 +13,9 @@ if ($_POST) {
 
     if ($sonuc->num_rows > 0) {
         $kullanici_verisi = $sonuc->fetch_assoc();
-
         
+        // Şifre kontrolü
         if (password_verify($sifre, $kullanici_verisi['sifre'])) {
-            
             $session_lifetime = 300; 
             $cookie_lifetime = 300;  
 
@@ -26,16 +24,13 @@ if ($_POST) {
             $_SESSION['last_activity'] = time(); 
             $_SESSION['expire_time'] = $session_lifetime; 
 
-            echo "<script> window.location.href='anasayfa.php'; </script>";
+            header("Location: anasayfa.php");
+            exit();
         } else {
-            echo "<script>
-            alert('HATALI ŞİFRE!'); window.location.href='index.php';
-            </script>";
+            $hata = "Hatalı şifre!";
         }
     } else {
-        echo "<script>
-        alert('HATALI KULLANICI ADI!'); window.location.href='index.php';
-        </script>";
+        $hata = "Hatalı kullanıcı adı!";
     }
 }
 ?>
@@ -46,12 +41,14 @@ if ($_POST) {
     <title>Yönetim Paneli Giriş</title>
 </head>
 <body style="text-align:center;padding-top:50px;">
-<form action="" method="post">
-    <b>Kullanıcı Adı:</b><br>
-    <input type="text" name="kullanici" size="30" required><br><br>
-    <b>Parola:</b><br>
-    <input type="password" name="sifre" size="30" required><br><br><br>
-    <input type="submit" value="Giriş Yap">
-</form>
+    <?php if (isset($hata)) echo "<p style='color:red'>$hata</p>"; ?>
+    
+    <form action="" method="post">
+        <b>Kullanıcı Adı:</b><br>
+        <input type="text" name="kullanici" size="30" required><br><br>
+        <b>Parola:</b><br>
+        <input type="password" name="sifre" size="30" required><br><br><br>
+        <input type="submit" value="Giriş Yap">
+    </form>
 </body>
 </html>
